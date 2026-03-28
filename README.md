@@ -5,7 +5,7 @@
 
 **Debuggers** é um jogo de tabuleiro cooperativo focado no ensino de lógica de programação. Desenvolvido para transformar o aprendizado de algoritmos em uma experiência lúdica, o jogo utiliza a sintaxe da linguagem **Python** para guiar os jogadores através de desafios reais de desenvolvimento.
 
-[Acesse a Landing Page do Projeto](https://seu-usuario.github.io/debuggers-game/)
+[Acesse a Landing Page do Projeto](https://ziquinatti.github.io/Debuggers-Game/)
 
 ---
 
@@ -24,7 +24,7 @@ Em *Debuggers*, os jogadores assumem o papel de programadores que precisam const
 
 ## 📦 Conteúdo para Download
 
-O jogo é disponibilizado no formato **Print & Play** (Imprima e Jogue). Você pode encontrar o pacote completo na aba [Releases](https://github.com/seu-usuario/debuggers-game/releases), contendo:
+O jogo é disponibilizado no formato **Print & Play** (Imprima e Jogue). Você pode encontrar o pacote completo na aba [Releases](#), contendo:
 
 1.  **Livro de Regras:** Guia completo de como jogar e configurar a partida.
 2.  **Deck de Cartas:** Cartas de comando, variáveis e bugs críticos.
