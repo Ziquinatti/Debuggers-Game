@@ -1,6 +1,23 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css");
 
 @font-face {
+    font-family: 'HVDComicSerif';
+    src: url('fonts/HVD_Comic_Serif_Pro.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'HVD-Symbols-Only';
+    src: url('fonts/HVD_Comic_Serif_Pro.otf') format('opentype');
+    /* Range que cobre: + - * / = < > ! % & | */
+    unicode-range: 
+        U+002B, U+002D, U+002A, U+002F, U+003D, U+003C, U+003E, U+0021, /* + - * / = < > ! */
+        U+0028, U+0029, /* ( ) */
+        U+007B, U+007D, /* { } */
+        U+005B, U+005D, /* [ ] */
+        U+0026, U+007C, U+0025; /* & | % */
+}
+
+@font-face {
     font-family: 'HeavyData';
     src: url('fonts/heav.ttf') format('truetype');
 }
@@ -27,29 +44,54 @@
         height: 400px;
         background-size: auto 100%;
     }
+
+    .compiler-body .terminal .panels {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Cores padrão (Dark Mode) */
 :root {
     --bg: #0d1117;
     --card-bg: #161b22;
+    --card-bg2: #232b36;
     --text: #c9d1d9;
     --accent: #3fb950;
     --highlight: #58a6ff;
+    --highlight2: #ffa631;
     --header-bg: #161b22;
     --img-opacity: 0.15;
     --bg-image: url('images/Background2.png');
     --footer-text: #8b949e;
     --border-color: #30363d;
+
+    --heavy: 'HVD-Symbols-Only', 'HeavyData', sans-serif;
+    --serif: 'HVDComicSerif', serif;
+    --code: 'Fira Code', monospace;
+    --sans: 'Inter', sans-serif;
+
+    --card-text: #fafafa;
+    --t-type: #f5b955;
+    --t-io: #c369a0;
+    --t-op: #407cb6;
+    --t-ctrl: #e64b4d;
+    --t-logic: #7d5096;
+    --t-var: #7d7d7d;
+    --t-val: #7d7d7d;
+    --t-cond: #7d7d7d;
+    --t-opCond: #eb8728;
+    --t-paren: #0e0e0e;
 }
 
 /* Cores para o Light Mode */
 body.light-mode {
     --bg: #f0f2f5;
     --card-bg: #ffffff;
+    --card-bg2: #ffffff;
     --text: #1f2328;
     --accent: #1a7f37;
     --highlight: #0969da;
+    --highlight2: #d88d2b;
     --header-bg: #ffffff;
     --img-opacity: 0.1;
     --bg-image: url('images/Background.png');
@@ -59,13 +101,12 @@ body.light-mode {
 body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--sans);
     margin: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s ease;
-    /* Transição suave do fundo */
     position: relative;
 }
 
@@ -77,11 +118,8 @@ body::before {
     left: 0;
     width: 100%;
     height: 1000px;
-    /* Altura onde a imagem aparece antes de sumir */
     z-index: -1;
-    /* Fica atrás de tudo */
 
-    /* Gradiente que usa a variável do fundo para o "fade" */
     background:
         linear-gradient(to bottom, transparent, var(--bg)),
         var(--bg-image);
@@ -89,11 +127,11 @@ body::before {
     background-size: cover;
     background-position: top center;
     opacity: var(--img-opacity);
-    /* Usa sua variável de opacidade */
     transition: opacity 0.3s ease;
 }
 
 .container {
+    width: 100%;
     max-width: 900px;
     margin: 0 auto;
     padding: 2rem;
@@ -117,27 +155,27 @@ header .subtitle {
 }
 
 code {
-    font-family: 'Fira Code', monospace;
+    font-family: var(--code);
     color: var(--text);
 }
 
 h1,
 .logo {
-    font-family: 'HeavyData', sans-serif;
+    font-family: var(--heavy);
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
-/* #theme-toggle {
-    cursor: pointer;
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--accent);
-    background: transparent;
-    color: var(--accent);
-    font-family: 'Fira Code', monospace;
-    font-size: 0.8rem;
-} */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-family: var(--code);
+    color: var(--highlight);
+    margin-bottom: 1rem;
+}
 
 /* COMEÇO do Switch */
 .switch {
@@ -188,10 +226,6 @@ input:checked+.slider {
     background-color: var(--highlight);
 }
 
-/* input:focus+.slider {
-    box-shadow: 0 0 1px var(--border-color);
-} */
-
 input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
@@ -214,17 +248,6 @@ input:checked+.slider:before {
 #hero {
     text-align: center;
     padding: 4rem 1rem;
-}
-
-h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-h2 {
-    font-family: 'Fira Code', monospace;
-    color: var(--highlight);
-    margin-bottom: 1.5rem;
 }
 
 .highlight {
@@ -295,14 +318,14 @@ h2 {
     overflow: hidden;
     border-radius: 8px;
     border: 2px solid var(--card-bg);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
 
 .gallery-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     filter: grayscale(20%);
     transition: 0.3s;
 }
@@ -317,14 +340,14 @@ h2 {
 }
 
 .modal {
-    display: none; /* Escondido por padrão */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(5px);
     cursor: zoom-out;
 }
@@ -338,7 +361,7 @@ h2 {
     top: 50%;
     transform: translateY(-50%);
     border-radius: 5px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .close {
@@ -356,4 +379,248 @@ footer {
     padding: 2rem;
     font-size: 0.9rem;
     color: var(--footer-text);
+}
+
+/* Compiler */
+.blink {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.compiler-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.compiler-body .challenges-list {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.compiler-body .challenges-list::-webkit-scrollbar {
+    height: 6px;
+}
+
+.compiler-body .challenges-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.compiler-body .challenges-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+.compiler-body .challenges-list::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+.compiler-body .challenges-list .challenge-btn {
+    width: 210px;
+    flex-shrink: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+    font-family: var(--sans);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.compiler-body .challenges-list .challenge-btn .ch-name {
+    font-family: var(--heavy);
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.compiler-body .challenges-list .challenge-btn .ch-desc {
+    font-size: .8rem;
+    margin-top: 2px;
+    line-height: 1.3;
+}
+
+.compiler-body .challenges-list .challenge-btn:hover {
+    border-color: var(--accent);
+    background: var(--card-bg2);
+}
+
+.compiler-body .challenges-list .challenge-btn.active {
+    border-color: var(--accent);
+    background: var(--card-bg2);
+    box-shadow: 0 0 0 1px var(--accent) inset;
+}
+
+.compiler-body .terminal {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.compiler-body .terminal .challenge-info {
+    background: var(--card-bg2);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    margin-bottom: .8rem;
+    font-size: 13px;
+}
+
+.compiler-body .terminal .challenge-info .ci-title {
+    font-family: var(--heavy);
+    color: var(--highlight);
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.compiler-body .terminal .panels {
+    display: grid;
+    grid-template-columns: .5fr 1fr;
+    gap: 1rem;
+}
+
+.compiler-body .terminal .panels .panel {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.compiler-body .terminal .panels .panel .panel-header {
+    background: var(--card-bg2);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.6rem 1rem;
+    font-family: var(--code);
+    font-size: 12px;
+    color: var(--highlight);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.compiler-body .terminal .panels .panel .panel-header .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.compiler-body .terminal .panels .panel .panel-body {
+    padding: 0.75rem;
+}
+
+.compiler-body .terminal .panels .panel .panel-body .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 160px;
+    color: var(--text);
+    font-family: var(--code);
+    font-size: 12px;
+    gap: 8px;
+    text-align: center;
+}
+
+.compiler-body .terminal .panels .panel .panel-body .empty-icon {
+    font-size: 28px;
+    opacity: 0.3;
+}
+
+.compiler-body .terminal .panels .panel .panel-body .palette-section {
+    margin-bottom: 1rem;
+}
+
+.compiler-body .terminal .panels .panel .panel-body .palette-section-title {
+    font-size: 11px;
+    color: var(--text);
+    font-family: var(--code);
+    letter-spacing: 2px;
+    margin-bottom: 0.4rem;
+}
+
+.compiler-body .terminal .panels .panel .panel-body .palette-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.compiler-body .terminal .panels .panel .panel-body .palette-cards .card-chip {
+    min-width: 45px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: var(--heavy);
+    font-size: 1rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.1s;
+    user-select: none;
+    white-space: nowrap;
+    color: var(--card-text);
+}
+
+.card-chip:hover {
+    filter: brightness(1.3);
+    transform: translateY(-1px);
+}
+
+.card-chip:active {
+    transform: scale(0.96);
+}
+
+.card-chip.t-type {
+    background: var(--t-type);
+}
+
+.card-chip.t-io {
+    background: var(--t-io);
+}
+
+.card-chip.t-op {
+    background: var(--t-op);
+}
+
+.card-chip.t-ctrl {
+    background: var(--t-ctrl);
+}
+
+.card-chip.t-logic {
+    background: var(--t-logic);
+}
+
+.card-chip.t-var {
+    background: var(--t-var);
+}
+
+.card-chip.t-val {
+    background: var(--t-val);
+}
+
+.card-chip.t-cond {
+    background: var(--t-cond);
+}
+
+.card-chip.t-opCond {
+    background: var(--t-opCond);
+}
+
+.card-chip.t-paren {
+    background: var(--t-paren);
 }

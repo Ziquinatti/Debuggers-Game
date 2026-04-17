@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/bug.ico" type="image/x-icon">
+    <title>Debuggers: A Batalha contra os Bugs</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <script src="js/modal.js"></script>
+    <script src="js/compiler.js"></script>
+    <script src="js/theme.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <p class="logo">Debuggers</p>
+                <code class="subtitle">A batalha contra os bugs</code>
+            </div>
+            <div>
+                <label class="switch">
+                    <input id="theme-toggle" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="compiler-body">
+
+        <div class="container" style="padding: .5rem 2rem;">
+            <h2>// COMPILADOR<span class="blink">_</span></h2>
+            <div style="font-family: var(--code); font-weight: bold;">selecione o desafio → monte o código → compile
+            </div>
+        </div>
+
+        <div class="container" style="padding: .5rem 2rem;">
+            <h2 style="font-size: 1.2rem; color: var(--highlight2);">// Desafios</h2>
+            <div id="challenges-list" class="challenges-list"></div>
+        </div>
+
+        <div class="container terminal" style="padding: .5rem 2rem;">
+            <h2 style="font-size: 1.2rem; color: var(--highlight2);">// Terminal</h2>
+            <div class="challenge-info">
+                <div class="ci-title" id="ci-title">Selecione um desafio...</div>
+                <div class="ci-desc" id="ci-desc">----</div>
+            </div>
+
+            <div class="panels">
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="dot"></div> cartas disponíveis
+                    </div>
+                    <div class="panel-body" id="palette-body">
+                        <div class="empty-state">
+                            <div class="empty-icon">◈</div>
+                            <div>selecione um desafio <br>para ver as cartas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <div class="dot" style="color:var(--accent2)"></div> área de código
+                    </div>
+                    <div class="panel-body">
+                        <!-- <div class="mode-tabs">
+                            <button class="mode-tab active" id="tab-click" onclick="setMode('click')">clique
+                                para adicionar</button>
+                            <button class="mode-tab" id="tab-select" onclick="setMode('select')">selecionar
+                                carta → linha</button>
+                        </div> -->
+                        <div id="build-area">
+                            <div class="empty-state">
+                                <div class="empty-icon">{ }</div>
+                                <div>selecione um desafio e<br>comece a montar seu algoritmo</div>
+                            </div>
+                        </div>
+                        <div class="compile-area">
+                            <button class="compile-btn" onclick="compile()">▶ compilar</button>
+                            <div id="result-box"></div>
+                            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
+                                <button class="secondary-btn" onclick="clearBuild()">limpar código</button>
+                                <button class="secondary-btn" onclick="addLine(false)">+ nova linha</button>
+                                <button class="secondary-btn" onclick="addLine(true)">+ linha indentada</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>// Desenvolvido por Lucas Ziquinatti e Rafael Lehnhart</p>
+            <p>Disponível no GitHub Pages</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

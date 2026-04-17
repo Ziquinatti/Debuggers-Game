@@ -8,44 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
 
-    <script>
-        window.onload = function() {
-            const themeToggle = document.getElementById("theme-toggle");
-            const currentTheme = localStorage.getItem("theme");
-    
-            if (currentTheme === "light") {
-                document.body.classList.add("light-mode");
-            }
-    
-            if (currentTheme === "light") {
-                document.body.classList.add("light-mode");
-                themeToggle.checked = true;
-            }
-
-            themeToggle.addEventListener("change", function() {
-                if (this.checked) {
-                    document.body.classList.add("light-mode");
-                    localStorage.setItem("theme", "light");
-                } else {
-                    document.body.classList.remove("light-mode");
-                    localStorage.setItem("theme", "dark");
-                }
-            });
-        }
-
-        function openModal(src) {
-            document.getElementById("imageModal").style.display = "block";
-            document.getElementById("imgFull").src = src;
-        }
-
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === "Escape") closeModal();
-        });
-    </script>
+    <script src="js/theme.js"></script>
+    <script src="js/modal.js"></script>
 </head>
 <body>
 
