@@ -4,10 +4,6 @@ window.onload = function() {
 
     if (currentTheme === "light") {
         document.body.classList.add("light-mode");
-    }
-
-    if (currentTheme === "light") {
-        document.body.classList.add("light-mode");
         themeToggle.checked = true;
     }
 

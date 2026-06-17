@@ -1,4 +1,4 @@
-# 🪲 Debuggers: A Batalha contra os Bugs
+# 🐞 Debuggers: A Batalha contra os Bugs
 
 ![Bugs](https://img.shields.io/badge/status-debugging-red?logo=ant-design&logoColor=white)
 ![Python Based](https://img.shields.io/badge/syntax-Python-blue?logo=python)
@@ -43,6 +43,10 @@ Para a página de divulgação, utilizamos tecnologias web leves para garantir p
 * **GitHub Pages** para hospedagem.
 
 ---
+
+## 🎵 Múscias e Sons
+* **8-Bit - Error** por [Breviceps](https://freesound.org/s/450616/) está licenciado sob [CC0 1.0](http://creativecommons.org)
+* **Acquire** por [Kenneth_Cooney](https://freesound.org/s/450616/) está licenciado sob [CC0 1.0](http://creativecommons.org)
 
 ## 👥 Autores
 

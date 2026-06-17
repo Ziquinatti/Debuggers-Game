@@ -10,18 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <script src="js/modal.js"></script>
-    <script src="js/compiler.js"></script>
-    <script src="js/theme.js"></script>
+    <script src="js/theme.js" defer></script>
+    <script src="js/compiler.js" defer></script>
 </head>
 
 <body>
 
     <header>
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <p class="logo">Debuggers</p>
-                <code class="subtitle">A batalha contra os bugs</code>
+            <div class="links">
+                <div>
+                    <p class="logo">Debuggers</p>
+                    <code class="subtitle">A batalha contra os bugs</code>
+                </div>
+                <a href="./index.html">HOME</a>
+                <a href="./debuggers_compiler.html" class="selected">Compilador</a>
+
             </div>
             <div>
                 <label class="switch">
@@ -32,71 +36,115 @@
         </div>
     </header>
 
-    <main class="compiler-body">
-
-        <div class="container" style="padding: .5rem 2rem;">
-            <h2>// COMPILADOR<span class="blink">_</span></h2>
-            <div style="font-family: var(--code); font-weight: bold;">selecione o desafio → monte o código → compile
-            </div>
+    <section class="container">
+        <div class="compiler-title">
+            <h2>//COMPILADOR<span class="blink">_</span></h2>
+            <button class="btn-guide" onclick="toggleGuide()" title="Como digitar o código">?</button>
         </div>
 
-        <div class="container" style="padding: .5rem 2rem;">
-            <h2 style="font-size: 1.2rem; color: var(--highlight2);">// Desafios</h2>
-            <div id="challenges-list" class="challenges-list"></div>
-        </div>
-
-        <div class="container terminal" style="padding: .5rem 2rem;">
-            <h2 style="font-size: 1.2rem; color: var(--highlight2);">// Terminal</h2>
-            <div class="challenge-info">
-                <div class="ci-title" id="ci-title">Selecione um desafio...</div>
-                <div class="ci-desc" id="ci-desc">----</div>
-            </div>
-
-            <div class="panels">
-                <div class="panel">
-                    <div class="panel-header">
-                        <div class="dot"></div> cartas disponíveis
-                    </div>
-                    <div class="panel-body" id="palette-body">
-                        <div class="empty-state">
-                            <div class="empty-icon">◈</div>
-                            <div>selecione um desafio <br>para ver as cartas</div>
-                        </div>
-                    </div>
+        <div id="guide-panel" style="display: none;">
+            <div class="panel">
+                <div class="rules">
+                    <p style="color:var(--highlight); font-weight:bold; margin-bottom:0.75rem">// como digitar o código</p>
+                    <p><span style="color:var(--accent)">↵ Enter</span> — nova linha do algoritmo</p>
+                    <p><span style="color:var(--accent)">|</span> — um nível de indentação (dentro de um bloco)</p>
+                    <p><span style="color:var(--accent)">| |</span> — dois níveis (bloco dentro de bloco)</p>
+                    <br>
+                    <p><span style="color:var(--accent)">( )</span> — os parênteses também são validados</p>
                 </div>
-                <div class="panel">
-                    <div class="panel-header">
-                        <div class="dot" style="color:var(--accent2)"></div> área de código
-                    </div>
-                    <div class="panel-body">
-                        <!-- <div class="mode-tabs">
-                            <button class="mode-tab active" id="tab-click" onclick="setMode('click')">clique
-                                para adicionar</button>
-                            <button class="mode-tab" id="tab-select" onclick="setMode('select')">selecionar
-                                carta → linha</button>
-                        </div> -->
-                        <div id="build-area">
-                            <div class="empty-state">
-                                <div class="empty-icon">{ }</div>
-                                <div>selecione um desafio e<br>comece a montar seu algoritmo</div>
-                            </div>
+                <div>
+                    <p style="color:var(--text); opacity:0.5; font-size:12px; margin-bottom:0.4rem">// exemplo — verificar_idade()</p>
+                    <div class="example">
+                        <div>
+                            <p style="opacity:0.8">A1 1</p>
+                            <p style="opacity:0.8">A1 7 B1</p>
+                            <p style="opacity:0.8">14 C1</p>
+                            <p style="color:#58a6ff; opacity:0.8">| 5 B2</p>
+                            <p style="opacity:0.8">16</p>
+                            <p style="color:#58a6ff; opacity:0.8">| 5 B3</p>
                         </div>
-                        <div class="compile-area">
-                            <button class="compile-btn" onclick="compile()">▶ compilar</button>
-                            <div id="result-box"></div>
-                            <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;">
-                                <button class="secondary-btn" onclick="clearBuild()">limpar código</button>
-                                <button class="secondary-btn" onclick="addLine(false)">+ nova linha</button>
-                                <button class="secondary-btn" onclick="addLine(true)">+ linha indentada</button>
-                            </div>
+                        <div>
+                            <p style="opacity:0.8">idade: int</p>
+                            <p style="opacity:0.8">idade = 15</p>
+                            <p style="opacity:0.8">if idade >= 18:</p>
+                            <p style="color:#58a6ff; opacity:0.8">| print("Maior de idade")</p>
+                            <p style="opacity:0.8">else</p>
+                            <p style="color:#58a6ff; opacity:0.8">| print("Menor de idade")</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="compiler-body">
+            <!-- SIDEBAR (desktop) / SELECT (mobile) -->
+            <div class="challenge-select">
+                <select id="challenge-select"></select>
+            </div>
+            <div class="challenge-sidebar" id="challenge-list"></div>
 
-    </main>
+            <!-- CONTEÚDO -->
+            <div class="challenge-content">
+
+                <!-- INFO DO DESAFIO -->
+                <div id="challenge-info" style="display:none">
+                    <div class="ci-title">
+                        <div class="ci-name" id="ci-name"></div>
+                        <img class="ci-difficulty" id="ci-difficulty" src="images/easy.png" alt="Dificuldade: Fácil"/>
+                    </div>
+                    <div class="ci-desc"  id="ci-desc"></div>
+                    <hr>
+                    <div class="ci-label">// cartas específicas deste desafio</div>
+                    <div class="ci-cards" id="ci-specific-cards"></div>
+                </div>
+
+                <!-- INPUT -->
+                <div style="position:relative">
+                    <div id="textarea-empty-state">
+                        <span style="font-size:4rem">◈</span>
+                        <span>Selecione um desafio para começar</span>
+                    </div>
+                    <textarea id="code-input" rows="8"></textarea>
+                </div>
+
+                <div class="btn-options">
+                    <button class="neon-btn btn-clear" onclick="clearInput()" >
+                        <span>&#10006; Limpar código</span>
+                    </button>
+                    <button class="neon-btn" onclick="preCompile()" >
+                        <span>▶ COMPILAR</span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div class="modal compile-modal" id="compile-modal">
+        <div class="modal-content">
+            <button class="btn-close" onclick="closeModal()">&times;</button>
+            <h3>// confirmar sequência</h3>
+            <p>Confira se as cartas abaixo correspondem ao algoritmo informado:</p>
+            <div class="modal-preview" id="modal-preview"></div>
+            <div class="btn-options" style="justify-content:space-between">
+                <button class="neon-btn btn-clear" onclick="closeModal()" >
+                    <span>Cancelar</span>
+                </button>
+                <button class="neon-btn" onclick="confirmCompile()">
+                    <span>Confirmar</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="result-modal" id="result-modal">
+        <div class="result-modal-box" id="result-modal-box">
+            <button class="btn-close" onclick="closeResultModal()">&times;</button>
+            <div class="result-title" id="result-modal-title"></div>
+            <div class="result-detail" id="result-modal-detail"></div>
+        </div>
+    </div>
 
     <footer>
         <div class="container">
