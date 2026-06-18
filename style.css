@@ -93,6 +93,15 @@
         border-right: 0 !important;
         border-bottom: 1px solid var(--accent-neon);
     }
+
+    .container .links a {
+        display: none;
+    }
+
+    .mobile-links {
+        display: flex !important;
+        
+    }
 }
 
 /* Cores padrão (Dark Mode) */
@@ -196,7 +205,17 @@ body::before {
     gap: 50px;
 }
 
-.container .links a {
+.mobile-links {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 15px 0 20px 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.container .links a,
+.mobile-links a {
     font-family: var(--code);
     font-size: 1.2rem;
     color: var(--text);
@@ -205,7 +224,8 @@ body::before {
     padding: 5px 0;
 }
 
-.container .links a.selected {
+.container .links a.selected,
+.mobile-links a.selected {
     color: var(--highlight2);
     border-color: var(--highlight2);
 }
