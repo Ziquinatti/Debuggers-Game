@@ -55,6 +55,8 @@ Projeto desenvolvido por:
 * **Lucas Ziquinatti** - *Game Design e Desenvolvimento* - [GitHub](https://github.com/Ziquinatti)
 * **Rafael Lehnhart** - *Game Design e Co-desenvolvimento*
 * **Prof.ª Giliane Bernardi** - *Orientadora*
+* **Prof. Andre Zanki Cordenonsi** - *Coorientador*
+* **Prof. Giani Petri** - *Coorientador*
 
 ---
 
